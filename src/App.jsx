@@ -21,11 +21,12 @@ import BigSpinner from "./pages/BigSpinner"
 // redux
 import { Provider } from "react-redux"
 import { store } from "./redux/store"
+import { frontendBase } from "./services/api"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<RootLayout />} errorElement={<ShowError />}>
+      <Route path={frontendBase + "/"} element={<RootLayout />} errorElement={<ShowError />}>
         {/* <Route path="/" element={<RootLayout />}> */}
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />

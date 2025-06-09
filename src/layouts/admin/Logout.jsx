@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import apiClient from "../../services/api";
+import apiClient, { frontendBase } from "../../services/api";
 import { setLoggedOut } from "../../redux/slices/loginSlice";
 
 const Logout = () => {
@@ -15,7 +15,8 @@ const Logout = () => {
         dispatch(setLoggedOut());
         // sessionStorage.removeItem('userIsAdmin');
 
-        navigate('/login');
+        // navigate('/login'); // localhost routes
+        navigate(frontendBase + '/login'); // localhost routes
       }
     } catch (error) {
       console.log(error);

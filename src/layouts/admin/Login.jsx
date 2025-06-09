@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
-import apiClient from "../../services/api";
+import apiClient, { frontendBase } from "../../services/api";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -31,10 +31,22 @@ const Login = () => {
       console.log(response)
       if (response.status === 204) {
         dispatch(setLoggedIn());
-        navigate('/')
+        // navigate('/'); // localhost routes
+        navigate(frontendBase + '/');
       }
     } catch (error) {
       console.log(error);
+
+      // Когда пользователь залогинен, но отсутствует запись в сессии
+      if (error.response.status === 403 && error.response.data.message === "Already Authenticated") {
+        console.log('сессия пользователя обновлена');
+        /* login(); // если основной запрос 302 -> залогиниться
+        sessionStorage.setItem('loggedIn', true); */
+        dispatch(setLoggedIn());
+        // navigate('/'); // localhost routes
+        navigate(frontendBase + '/');
+      }
+      
       setTooltip({
         text: error.response.data.message,
         active: true

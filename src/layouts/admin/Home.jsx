@@ -17,6 +17,7 @@ import HallConfigurator from '../../pages/HallConfigurator';
 import PriceConfigurator from '../../pages/PriceConfigurator';
 import SessionManager from '../../pages/SessionManager';
 import SellsConfigurator from '../../pages/SellsConfigurator';
+import { frontendBase } from '../../services/api';
 
 const Home = () => {
   const loginRedux = useSelector(state => state.loginReducer.loggedIn);
@@ -82,7 +83,8 @@ const Home = () => {
   }
 
   if (loginReduxLoading === 'failed') {
-    navigate('/login');
+    // navigate('/login');
+    navigate(frontendBase + '/login');
   }
 
   return (loginReduxLoading === 'idle' && !userIsAdminRedux)

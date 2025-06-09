@@ -8,6 +8,8 @@ const apiClient = axios.create({
 
 const BASEURL = 'http://localhost:8000';
 
+const frontendBase = '/fs-diploma-cinema-app'
+
 // export default apiClient;
 
-export { apiClient as default, BASEURL };
+export { apiClient as default, BASEURL, frontendBase };
