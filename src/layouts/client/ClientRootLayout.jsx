@@ -1,0 +1,31 @@
+// import '../../sass/client/normalize.css'
+// import '../../sass/client/styles.scss'
+import { useEffect } from 'react';
+// import '../../sass/client/clientPageBackground.css'
+
+import { Outlet, useLocation } from "react-router-dom"
+
+const ClientRootLayout = () => {
+
+  // цвет фона для разных путей
+  const location = useLocation();
+  useEffect(() => {
+    const { pathname: pathName } = location;
+    pathName.startsWith('/client/')
+      ? document.body.className = 'client'
+      : document.body.className = 'admin';
+  }, [location]);
+
+  return (
+    <>
+      <header className="page-header">
+        <h1 className="page-header__title">Идём<span>в</span>кино</h1>
+      </header>
+
+      <Outlet />
+    </>
+
+  )
+}
+
+export default ClientRootLayout

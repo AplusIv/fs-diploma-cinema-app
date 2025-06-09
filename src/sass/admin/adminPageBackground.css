@@ -1,0 +1,8 @@
+body.admin {
+  background-image: url('../../img/admin/background.jpg');
+  background-color: rgba(0, 0, 0, 0.50);
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-attachment: fixed;
+  counter-reset: num;
+}
