@@ -24,12 +24,7 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      await axios.create({
-        baseURL: 'http://localhost:8000',
-        withCredentials: true,
-        withXSRFToken: true, // !!!
-      }).get('/sanctum/csrf-cookie');
-
+      
       const token = await axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true,
