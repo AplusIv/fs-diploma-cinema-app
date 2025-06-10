@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
 import apiClient, { frontendBase } from "../../services/api";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,20 +24,32 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      await apiClient.get('/sanctum/csrf-cookie');
-      
-      const token = await apiClient.post('/createToken', {
+      await axios.create({
+        baseURL: 'http://localhost:8000',
+        withCredentials: true,
+        // withXSRFToken: true, // !!!
+      }).get('/sanctum/csrf-cookie');
+
+      const token = await axios.create({
+        baseURL: 'http://localhost:8000',
+        withCredentials: true,
+        // withXSRFToken: true, // !!!
+      }).post('/createToken', {
         email: email,
         password: password,
       });
       console.log(token);
 
-      const response = await apiClient.post('/login', {
+      const response = await axios.create({
+        baseURL: 'http://localhost:8000',
+        withCredentials: true,
+        // withXSRFToken: true, // !!!
+      }).post('/login', {
         email: email,
         password: password,
       }, {
         headers: {
-          'Authorization': token,
+          'Authorization': 'Bearer ' + token,
           // 'Content-Type': 'application/json'
         }
       });
