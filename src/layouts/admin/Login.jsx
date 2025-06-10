@@ -27,14 +27,14 @@ const Login = () => {
       await axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true,
-        // withXSRFToken: true, // !!!
+        withXSRFToken: true, // !!!
       }).get('/sanctum/csrf-cookie');
 
       const token = await axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true,
-        // withXSRFToken: true, // !!!
-      }).post('/createToken', {
+        withXSRFToken: true, // !!!
+      }).post('api/createToken', {
         email: email,
         password: password,
       });
@@ -43,7 +43,7 @@ const Login = () => {
       const response = await axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true,
-        // withXSRFToken: true, // !!!
+        withXSRFToken: true, // !!!
       }).post('/login', {
         email: email,
         password: password,
