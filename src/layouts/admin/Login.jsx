@@ -23,18 +23,21 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      const token = await apiClient.post('/createToken');
+      const token = await apiClient.post('/createToken', {
+        email: email,
+        password: password,
+      });
       console.log(token);
-      
+
       const response = await apiClient.post('/login', {
         email: email,
         password: password,
-        }, {
-          headers: {
-        'Authorization': token,
-        // 'Content-Type': 'application/json'
-      }
-        });
+      }, {
+        headers: {
+          'Authorization': token,
+          // 'Content-Type': 'application/json'
+        }
+      });
       console.log(response)
       if (response.status === 204) {
         dispatch(setLoggedIn());
@@ -53,7 +56,7 @@ const Login = () => {
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');
       }
-      
+
       setTooltip({
         text: error.response.data.message,
         active: true
