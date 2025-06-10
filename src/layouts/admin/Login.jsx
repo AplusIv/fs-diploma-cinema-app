@@ -23,11 +23,18 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      await apiClient.get('/sanctum/csrf-cookie');
+      const token = await apiClient.post('/creatToken');
+      console.log(token);
+      
       const response = await apiClient.post('/login', {
         email: email,
-        password: password
-      });
+        password: password,
+        }, {
+          headers: {
+        'Authorization': token,
+        // 'Content-Type': 'application/json'
+      }
+        });
       console.log(response)
       if (response.status === 204) {
         dispatch(setLoggedIn());
