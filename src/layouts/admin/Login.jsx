@@ -23,7 +23,7 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      const token = await apiClient.post('/creatToken');
+      const token = await apiClient.post('/createToken');
       console.log(token);
       
       const response = await apiClient.post('/login', {
