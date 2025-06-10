@@ -25,31 +25,28 @@ const Login = () => {
 
     try {
       
-      const token = await axios.create({
-        baseURL: 'http://localhost:8000',
-        withCredentials: true,
-        withXSRFToken: true, // !!!
-      }).post('api/createToken', {
+      const response = await apiClient.post('api/createToken', {
         email: email,
         password: password,
       });
-      console.log(token);
 
-      const response = await axios.create({
-        baseURL: 'http://localhost:8000',
-        withCredentials: true,
-        withXSRFToken: true, // !!!
-      }).post('/login', {
-        email: email,
-        password: password,
-      }, {
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          // 'Content-Type': 'application/json'
-        }
-      });
+      console.log(response);
+
+      // const response = await axios.create({
+      //   baseURL: 'http://localhost:8000',
+      //   withCredentials: true,
+      //   withXSRFToken: true, // !!!
+      // }).post('/login', {
+      //   email: email,
+      //   password: password,
+      // }, {
+      //   headers: {
+      //     'Authorization': 'Bearer ' + token,
+      //     // 'Content-Type': 'application/json'
+      //   }
+      // });
       console.log(response)
-      if (response.status === 204) {
+      if (response.status === 200) {
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');
