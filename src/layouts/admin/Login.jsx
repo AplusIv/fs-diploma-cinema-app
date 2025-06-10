@@ -23,6 +23,8 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
+      await apiClient.get('/sanctum/csrf-cookie');
+      
       const token = await apiClient.post('/createToken', {
         email: email,
         password: password,
