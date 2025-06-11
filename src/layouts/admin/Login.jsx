@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLoggedIn } from "../../redux/slices/loginSlice";
+import { setApiToken, setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
 import apiClient, { frontendBase } from "../../services/api";
 import axios from "axios";
@@ -24,13 +24,12 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      
-      const response = await apiClient.post('api/createToken', {
+      const tokenResponse = await apiClient.post('api/createToken', {
         email: email,
         password: password,
       });
 
-      console.log(response);
+      console.log(tokenResponse);
 
       // const response = await axios.create({
       //   baseURL: 'http://localhost:8000',
@@ -45,8 +44,18 @@ const Login = () => {
       //     // 'Content-Type': 'application/json'
       //   }
       // });
-      console.log(response)
-      if (response.status === 200) {
+      console.log(tokenResponse);
+      if (tokenResponse.status === 200) {
+        // получение bearer token
+        const responseData = tokenResponse.data;
+        const { token } = responseData;
+        // взять часть после "|"
+        const apiToken = token.split('|')[1];
+
+        dispatch(setApiToken(apiToken));
+        // запись в куки "token=<apitoken>"
+        document.cookie = 'apiToken=' + apiToken;
+
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');

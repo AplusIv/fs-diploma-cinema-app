@@ -10,6 +10,9 @@ const initialState = {
   // userIsAdmin: undefined,
   loggedIn: JSON.parse(sessionStorage.getItem('loggedIn')),
   userIsAdmin: JSON.parse(sessionStorage.getItem('userIsAdmin')),
+
+  // 
+  apiToken: undefined,
 }
 
 export const loginSlice = createSlice({
@@ -32,6 +35,7 @@ export const loginSlice = createSlice({
         state.loading = 'failed'
       }
     },
+    // postToken: () => { }, // запуск worker saga
     getUser: () => { }, // запуск worker saga get user
     setLoggedIn: (state) => {
       sessionStorage.setItem('loggedIn', true);
@@ -86,6 +90,13 @@ export const loginSlice = createSlice({
       sessionStorage.setItem('loginErrorStatus', status);
       sessionStorage.setItem('loginErrorStatusText', statusText);
     },
+    setApiToken: (state, action) => {
+      const { payload } = action;
+      state.apiToken = payload;
+
+      // запись в sessionStorage для последующих запросов
+      sessionStorage.setItem('apiToken', payload);
+    },
   }
 })
 
@@ -94,12 +105,14 @@ export const {
   dataLoading,
   dataReceived,
   dataFailed,
+  // postToken,
   getUser,
   setLoggedIn,
   checkUserIsAdmin,
   setLoggedOut,
   setStateByStorageData,
   setErrors,
+  setApiToken
 } = loginSlice.actions;
 
 export default loginSlice.reducer;
