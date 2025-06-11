@@ -12,7 +12,7 @@ const initialState = {
   userIsAdmin: JSON.parse(sessionStorage.getItem('userIsAdmin')),
 
   // 
-  apiToken: undefined,
+  apiToken: null,
 }
 
 export const loginSlice = createSlice({
@@ -95,7 +95,9 @@ export const loginSlice = createSlice({
       state.apiToken = payload;
 
       // запись в sessionStorage для последующих запросов
-      sessionStorage.setItem('apiToken', payload);
+      payload === null
+        ? sessionStorage.removeItem('apiToken')
+        : sessionStorage.setItem('apiToken', payload);
     },
   }
 })

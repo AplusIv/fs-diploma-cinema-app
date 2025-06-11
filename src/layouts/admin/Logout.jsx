@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import apiClient, { frontendBase } from "../../services/api";
-import { setLoggedOut } from "../../redux/slices/loginSlice";
+import { setApiToken, setLoggedOut } from "../../redux/slices/loginSlice";
 
 const Logout = () => {
   const loginRedux = useSelector(state => state.loginReducer.loggedIn);
@@ -10,9 +10,14 @@ const Logout = () => {
 
   const logout = async () => {
     try {
-      const response = await apiClient.post('/logout');
+      const response = await apiClient.post('api/logout');
       if (response.status === 204) {
         dispatch(setLoggedOut());
+        dispatch(setApiToken(null));
+
+        // удаление куки с токеном (передать отрицательную дату)
+        document.cookie = `apiToken=;expires=${new Date(0)}`;
+
         // sessionStorage.removeItem('userIsAdmin');
 
         // navigate('/login'); // localhost routes
