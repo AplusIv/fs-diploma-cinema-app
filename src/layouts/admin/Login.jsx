@@ -24,7 +24,16 @@ const Login = () => {
     // axios.defaults.withCredentials = true;
 
     try {
-      const tokenResponse = await apiClient.post('api/createToken', {
+      // const tokenResponse = await apiClient.post('api/createToken', {
+      //   email: email,
+      //   password: password,
+      // });
+
+      const tokenResponse = await axios.create({
+        baseURL: 'http://localhost:8000',
+        withCredentials: true,
+        withXSRFToken: true,
+      }).post('api/createToken', {
         email: email,
         password: password,
       });

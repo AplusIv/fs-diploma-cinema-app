@@ -1,10 +1,32 @@
 import axios from 'axios';
- 
+
+// Получение куки для заполнения заголовка Authorization
+function getCookie() {
+  return document.cookie.split('; ').reduce((acc, item) => {
+    const [name, value] = item.split('=')
+    acc[name] = value
+    return acc
+  }, {})
+}
+
+const cookie = getCookie();
+
+const { apiToken } = cookie;
+
 const apiClient = axios.create({
-    baseURL: 'http://localhost:8000',
-    withCredentials: true,
-    withXSRFToken: true, // !!!
+  baseURL: 'http://localhost:8000',
+  withCredentials: true,
+  withXSRFToken: true, // !!!
+  headers: {
+    Authorization: 'Bearer ' + apiToken,
+    }
 });
+
+// const apiClient = axios.create({
+//     baseURL: 'http://localhost:8000',
+//     withCredentials: true,
+//     withXSRFToken: true, // !!!
+// });
 
 const BASEURL = 'http://localhost:8000';
 
