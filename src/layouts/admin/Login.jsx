@@ -83,7 +83,7 @@ const Login = () => {
       }
 
       setTooltip({
-        text: error.response.data.message,
+        text: error.response.data.message || error.response.data.err,
         active: true
       });
       setTimeout(() => {
