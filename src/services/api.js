@@ -9,16 +9,16 @@ function getCookie() {
   }, {})
 }
 
-const cookie = getCookie();
+// const cookie = getCookie();
 
-const { apiToken } = cookie;
+// const { apiToken } = cookie;
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,
   withXSRFToken: true, // !!!
   headers: {
-    Authorization: 'Bearer ' + apiToken,
+    Authorization: 'Bearer ' + getCookie().apiToken,
     }
 });
 
@@ -34,4 +34,4 @@ const frontendBase = '/fs-diploma-cinema-app'
 
 // export default apiClient;
 
-export { apiClient as default, BASEURL, frontendBase, apiToken };
+export { apiClient as default, BASEURL, frontendBase };

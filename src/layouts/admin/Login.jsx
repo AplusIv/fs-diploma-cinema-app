@@ -65,6 +65,8 @@ const Login = () => {
         // запись в куки "token=<apitoken>"
         document.cookie = 'apiToken=' + apiToken;
 
+        // export apiToken
+
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');
