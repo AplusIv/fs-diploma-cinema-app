@@ -25,6 +25,9 @@ const Home = () => {
   const userIsAdminRedux = useSelector(state => state.loginReducer.userIsAdmin);
   console.log({ userIsAdminRedux });
 
+  const ApiTokenRedux = useSelector(state => state.loginReducer.apiToken);
+  console.log({ ApiTokenRedux });
+
   // статусы загрузки данных
   const hallsReduxLoading = useSelector(state => state.hallsReducer.loading);
   const placesReduxLoading = useSelector(state => state.placesReducer.loading);
