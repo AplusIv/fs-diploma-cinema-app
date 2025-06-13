@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setApiToken, setLoggedIn } from "../../redux/slices/loginSlice";
+import { getUser, setApiToken, setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
 import apiClient, { frontendBase } from "../../services/api";
 import axios from "axios";
@@ -64,6 +64,8 @@ const Login = () => {
         dispatch(setApiToken(apiToken));
         // запись в куки "token=<apitoken>"
         document.cookie = 'apiToken=' + apiToken;
+
+        dispatch(getUser());  
 
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
