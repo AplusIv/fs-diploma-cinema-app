@@ -34,4 +34,4 @@ const frontendBase = '/fs-diploma-cinema-app'
 
 // export default apiClient;
 
-export { apiClient as default, BASEURL, frontendBase };
+export { apiClient as default, BASEURL, frontendBase, apiToken };

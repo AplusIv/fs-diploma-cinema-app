@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import { Outlet, useLocation } from "react-router-dom"
 import Logout from './Logout';
+import { frontendBase } from '../../services/api';
 
 const RootLayout = () => {
 
@@ -12,7 +13,7 @@ const RootLayout = () => {
   const location = useLocation();
   useEffect(() => {
     const { pathname: pathName } = location;
-    pathName.startsWith('/client/')
+    pathName.startsWith(frontendBase + '/client/')
       ? document.body.className = 'client'
       : document.body.className = 'admin';
   }, [location]);

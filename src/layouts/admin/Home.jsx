@@ -17,7 +17,7 @@ import HallConfigurator from '../../pages/HallConfigurator';
 import PriceConfigurator from '../../pages/PriceConfigurator';
 import SessionManager from '../../pages/SessionManager';
 import SellsConfigurator from '../../pages/SellsConfigurator';
-import { frontendBase } from '../../services/api';
+import { apiToken, frontendBase } from '../../services/api';
 
 const Home = () => {
   const loginRedux = useSelector(state => state.loginReducer.loggedIn);
@@ -58,9 +58,9 @@ const Home = () => {
     // проверка аутентификации пользователя 
     console.log('проверка аутентификации пользователя');
 
-    dispatch(getUser());    
+    dispatch(getUser());
     // Если пользователь с правами администратора -> загрузить основные сущности: залы, места, фильмы, сеансы
-  }, []);
+  }, [apiToken]);
 
 
   useEffect(() => {

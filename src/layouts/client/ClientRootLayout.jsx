@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 // import '../../sass/client/clientPageBackground.css'
 
 import { Outlet, useLocation } from "react-router-dom"
+import { frontendBase } from '../../services/api';
 
 const ClientRootLayout = () => {
 
@@ -11,7 +12,7 @@ const ClientRootLayout = () => {
   const location = useLocation();
   useEffect(() => {
     const { pathname: pathName } = location;
-    pathName.startsWith('/client/')
+    pathName.startsWith(frontendBase + '/client/')
       ? document.body.className = 'client'
       : document.body.className = 'admin';
   }, [location]);
