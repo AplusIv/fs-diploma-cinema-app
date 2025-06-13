@@ -30,14 +30,14 @@ const router = createBrowserRouter(
         {/* <Route path="/" element={<RootLayout />}> */}
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="client" element={<ClientRootLayout />}>
-          <Route path="schedule/:date?" element={<Index />} />
-          <Route path="buying" element={<BuyingCheck />} />
-          <Route path="payment" element={<PaymentCheck />} />
-          <Route path="ticket" element={<TicketCheck />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
       </Route>
+      <Route path={frontendBase + "/client"} element={<ClientRootLayout />}>
+        <Route path="schedule/:date?" element={<Index />} />
+        <Route path="buying" element={<BuyingCheck />} />
+        <Route path="payment" element={<PaymentCheck />} />
+        <Route path="ticket" element={<TicketCheck />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
     </>
   )
 )
