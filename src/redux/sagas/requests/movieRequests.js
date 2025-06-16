@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiClient from "../../../services/api";
+import apiClient, { getCookie } from "../../../services/api";
 
 // Функционал: Получение всех фильмов гостем сайта (неавторизованный пользователь)
 export const getGuestMoviesFromDB = async () => {
@@ -11,9 +11,24 @@ export const getGuestMoviesFromDB = async () => {
 // Функционал: Получение всех фильмов
 export const getMoviesFromDB = async () => {
   console.log('Get Movies request');
-  const response = await apiClient.get('/api/movies');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+  const response = await apiClient.get('/api/movies', {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+      }
+  });
   return response;
 }
+
+// // Функционал: Получение всех фильмов
+// export const getMoviesFromDB = async () => {
+//   console.log('Get Movies request');
+//   const response = await apiClient.get('/api/movies');
+//   return response;
+// }
 
 // Функционал: Добавление новых фильмов/нескольких фильмов в массиве
 // {moviesToAddInDB, 'api/movies'}

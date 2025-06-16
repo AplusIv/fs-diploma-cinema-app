@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiClient from "../../../services/api";
+import apiClient, { getCookie } from "../../../services/api";
 
 // Функционал: Получение всех залов гостем сайта (неавторизованный пользователь)
 export const getGuestHallsFromDB = async () => {
@@ -11,7 +11,16 @@ export const getGuestHallsFromDB = async () => {
 // Функционал: Получение всех залов
 export const getHallsFromDB = async () => {
   console.log('Get Halls request');
-  const response = await apiClient.get('/api/halls');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+
+  const response = await apiClient.get('/api/halls', {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+      }
+  });
   return response;
 }
 
@@ -31,9 +40,9 @@ export const changeDataInDB = async (dataArray, url) => {
       return await apiClient.put(`${url}/${data.id}`, data);
     });
     const responses = await axios.all(promises);
-    return responses;   
+    return responses;
   } catch (error) {
-    console.log(error);    
+    console.log(error);
   }
 }
 
@@ -41,6 +50,6 @@ export const changeDataInDB = async (dataArray, url) => {
 export const deleteHallFromDB = async (id) => {
   console.log('Hall delete request');
   const response = await apiClient.delete('api/halls/' + id);
-  const {status} = response;
+  const { status } = response;
   return status;
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiClient from "../../../services/api";
+import apiClient, { getCookie } from "../../../services/api";
 
 // Функционал: Получение всех сеансов гостем сайта (неавторизованный пользователь)
 export const getGuestSessionsFromDB = async () => {
@@ -11,7 +11,15 @@ export const getGuestSessionsFromDB = async () => {
 // Функционал: Получение всех сеансов
 export const getSessionsFromDB = async () => {
   console.log('Get Sessions request');
-  const response = await apiClient.get('/api/sessions');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+  const response = await apiClient.get('/api/sessions', {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+      }
+  });
   return response;
 }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import apiClient from "../../../services/api";
+import apiClient, { getCookie } from "../../../services/api";
 
 // Функционал: Получение всех мест гостем сайта (неавторизованный пользователь)
 export const getGuestPlacesFromDB = async () => {
@@ -11,7 +11,15 @@ export const getGuestPlacesFromDB = async () => {
 // Функционал: Получение всех мест
 export const getPlacesFromDB = async () => {
   console.log('Get Places request');
-  const response = await apiClient.get('/api/places');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+  const response = await apiClient.get('/api/places', {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+      }
+  });
   return response;
 }
 
