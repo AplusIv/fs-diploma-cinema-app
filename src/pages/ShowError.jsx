@@ -1,4 +1,5 @@
 import { Link, useRouteError } from "react-router-dom"
+import { frontendBase } from "../services/api";
 
 
 const ShowError = () => {
@@ -8,7 +9,7 @@ const ShowError = () => {
       <h2>Error</h2>
       <p>{error.data}</p>
       <p>{error.message}</p>
-      <Link to="/">На главную</Link>
+      <Link to={frontendBase}>На главную</Link>
     </div>
   )
 }
