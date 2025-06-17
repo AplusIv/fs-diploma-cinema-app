@@ -17,9 +17,9 @@ const apiClient = axios.create({
   baseURL: 'http://localhost:8000',
   withCredentials: true,
   withXSRFToken: true, // !!!
-  headers: {
-    Authorization: 'Bearer ' + getCookie().apiToken,
-    }
+  // headers: {
+  //   Authorization: 'Bearer ' + getCookie().apiToken,
+  //   }
 });
 
 // const apiClient = axios.create({

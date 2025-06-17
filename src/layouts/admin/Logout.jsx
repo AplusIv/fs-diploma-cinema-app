@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import apiClient, { frontendBase } from "../../services/api";
+import apiClient, { frontendBase, getCookie } from "../../services/api";
 import { setApiToken, setLoggedOut } from "../../redux/slices/loginSlice";
 
 const Logout = () => {
@@ -9,8 +9,19 @@ const Logout = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
+
+    // получение актуальных на момент запроса кук, поиск apiToken
+    const { apiToken } = getCookie();
+
     try {
-      const response = await apiClient.post('api/logout');
+      const response = await apiClient.post(
+        'api/logout',
+        null,
+        {
+          headers: {
+            Authorization: 'Bearer ' + apiToken,
+          }
+        });
       if (response.status === 204) {
         dispatch(setLoggedOut());
         dispatch(setApiToken(null));
@@ -29,9 +40,9 @@ const Logout = () => {
   };
 
   return (
-    loginRedux 
-    // isLoggedIn
-      ? <button type="button" className="conf-step__button conf-step__button-warning" onClick={logout} >Выйти</button> 
+    loginRedux
+      // isLoggedIn
+      ? <button type="button" className="conf-step__button conf-step__button-warning" onClick={logout} >Выйти</button>
       : null
   )
 }
