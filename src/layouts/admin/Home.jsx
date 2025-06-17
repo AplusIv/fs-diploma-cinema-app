@@ -17,7 +17,7 @@ import HallConfigurator from '../../pages/HallConfigurator';
 import PriceConfigurator from '../../pages/PriceConfigurator';
 import SessionManager from '../../pages/SessionManager';
 import SellsConfigurator from '../../pages/SellsConfigurator';
-import { apiToken, frontendBase } from '../../services/api';
+import { frontendBase } from '../../services/api';
 
 const Home = () => {
   const loginRedux = useSelector(state => state.loginReducer.loggedIn);
@@ -25,8 +25,8 @@ const Home = () => {
   const userIsAdminRedux = useSelector(state => state.loginReducer.userIsAdmin);
   console.log({ userIsAdminRedux });
 
-  const ApiTokenRedux = useSelector(state => state.loginReducer.apiToken);
-  console.log({ ApiTokenRedux });
+  const apiTokenRedux = useSelector(state => state.loginReducer.apiToken);
+  console.log({ apiTokenRedux });
 
   // статусы загрузки данных
   const hallsReduxLoading = useSelector(state => state.hallsReducer.loading);
@@ -63,9 +63,12 @@ const Home = () => {
     // проверка аутентификации пользователя 
     console.log('проверка аутентификации пользователя');
 
-    dispatch(getUser());
+    if (!apiTokenRedux === null) {
+      // не запрашивать юзера после логаута
+      dispatch(getUser());
+    }
     // Если пользователь с правами администратора -> загрузить основные сущности: залы, места, фильмы, сеансы
-  }, [ApiTokenRedux, loginRedux]);
+  }, [apiTokenRedux, loginRedux]);
 
 
   useEffect(() => {

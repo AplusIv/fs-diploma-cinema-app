@@ -18,7 +18,7 @@ export const getMoviesFromDB = async () => {
   const response = await apiClient.get('/api/movies', {
     headers: {
       Authorization: 'Bearer ' + apiToken,
-      }
+    }
   });
   return response;
 }
@@ -34,6 +34,10 @@ export const getMoviesFromDB = async () => {
 // {moviesToAddInDB, 'api/movies'}
 export const addDataToDB = async (dataArray, url) => {
   console.log('array post request');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     const promises = dataArray.map(async data => {
       const formData = new FormData();
@@ -43,12 +47,16 @@ export const addDataToDB = async (dataArray, url) => {
         formData.append(entry[0], entry[1]);
       });
 
-      return await apiClient.post(url, formData);
+      return await apiClient.post(url, formData, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
-    return responses;   
+    return responses;
   } catch (error) {
-    console.log(error);    
+    console.log(error);
   }
 }
 
@@ -56,6 +64,10 @@ export const addDataToDB = async (dataArray, url) => {
 // {moviesToChangeInDB, 'api/movies'}
 export const changeDataInDB = async (dataArray, url) => {
   console.log('array put requests');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     const promises = dataArray.map(async data => {
       const formData = new FormData();
@@ -63,18 +75,22 @@ export const changeDataInDB = async (dataArray, url) => {
 
       entries.forEach(entry => {
         formData.append(entry[0], entry[1]);
-      });  
+      });
 
       // добавить вручную PUT
       formData.append('_method', 'PUT'); // методы PUT PATCH не распознают формдату на бэкенде
 
-      return await apiClient.post(`${url}/${data.id}`, formData);
+      return await apiClient.post(`${url}/${data.id}`, formData, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
     // const consoles = axios.spread(response => console.log(response));
-    return responses;   
+    return responses;
   } catch (error) {
-    console.log(error);    
+    console.log(error);
   }
 }
 
@@ -117,14 +133,21 @@ export const changeDataInDB = async (dataArray, url) => {
 export const deleteDataInDB = async (dataArray, url) => {
   console.log('array delete request');
 
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   // dataArray содержит только id удаляемых элементов
   try {
     const promises = dataArray.map(async id => {
-      return await apiClient.delete(`${url}/${id}`);
+      return await apiClient.delete(`${url}/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
-    return responses;   
+    return responses;
   } catch (error) {
-    console.log(error);    
+    console.log(error);
   }
 }

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCookie } from "../../services/api";
 
 const initialState = {
   loading: 'idle',
@@ -12,7 +13,7 @@ const initialState = {
   userIsAdmin: JSON.parse(sessionStorage.getItem('userIsAdmin')),
 
   // 
-  apiToken: null,
+  apiToken: getCookie().apiToken,
 }
 
 export const loginSlice = createSlice({

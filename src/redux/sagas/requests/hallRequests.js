@@ -19,7 +19,7 @@ export const getHallsFromDB = async () => {
   const response = await apiClient.get('/api/halls', {
     headers: {
       Authorization: 'Bearer ' + apiToken,
-      }
+    }
   });
   return response;
 }
@@ -27,7 +27,15 @@ export const getHallsFromDB = async () => {
 // Функционал: Добавление нового зала
 export const addHallToDB = async (data) => {
   console.log('Hall adding request');
-  const response = await apiClient.post('api/halls', data);
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+  const response = await apiClient.post('api/halls', data, {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+    }
+  });
   return response;
 }
 
@@ -35,9 +43,17 @@ export const addHallToDB = async (data) => {
 // {updatedHalls, 'api/halls'}
 export const changeDataInDB = async (dataArray, url) => {
   console.log('array put requests');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     const promises = dataArray.map(async data => {
-      return await apiClient.put(`${url}/${data.id}`, data);
+      return await apiClient.put(`${url}/${data.id}`, data, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
     return responses;
@@ -49,7 +65,15 @@ export const changeDataInDB = async (dataArray, url) => {
 // Функционал: Удаление выбранного зала
 export const deleteHallFromDB = async (id) => {
   console.log('Hall delete request');
-  const response = await apiClient.delete('api/halls/' + id);
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
+  const response = await apiClient.delete('api/halls/' + id, {
+    headers: {
+      Authorization: 'Bearer ' + apiToken,
+    }
+  });
   const { status } = response;
   return status;
 }

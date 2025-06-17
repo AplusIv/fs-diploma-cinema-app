@@ -18,17 +18,25 @@ export const getPlacesFromDB = async () => {
   const response = await apiClient.get('/api/places', {
     headers: {
       Authorization: 'Bearer ' + apiToken,
-      }
+    }
   });
   return response;
 }
 
 // Функционал заполнение новыми местами измененный зал/залы
 export const addPlacesToHall = async (dataArray) => {
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     console.log('post request new places');
     const promises = dataArray.map(async data => {
-      return await apiClient.post(`api/halls/${data.id}/places`, data);
+      return await apiClient.post(`api/halls/${data.id}/places`, data, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
     return responses;
@@ -40,9 +48,17 @@ export const addPlacesToHall = async (dataArray) => {
 // Функционал: Изменение типов мест для зала/залов
 export const updateDataInDB = async (dataArray) => {
   console.log('array put requests');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     const promises = dataArray.map(async ({ hall_id, places }) => {
-      return await apiClient.put(`api/halls/${hall_id}/places`, places);
+      return await apiClient.put(`api/halls/${hall_id}/places`, places, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
     return responses;
@@ -54,9 +70,17 @@ export const updateDataInDB = async (dataArray) => {
 // Функционал: удаление всех мест для конкретного зала/залов
 export const deletePlacesFromHall = async (dataArray) => {
   console.log('array delete requests');
+
+  // получение актуальных на момент запроса кук, поиск apiToken
+  const { apiToken } = getCookie();
+
   try {
     const promises = dataArray.map(async data => {
-      return await apiClient.delete(`api/halls/${data.id}/places`);
+      return await apiClient.delete(`api/halls/${data.id}/places`, {
+        headers: {
+          Authorization: 'Bearer ' + apiToken,
+        }
+      });
     });
     const responses = await axios.all(promises);
     return responses;

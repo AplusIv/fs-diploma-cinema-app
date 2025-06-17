@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setApiToken, setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
-import apiClient, { frontendBase } from "../../services/api";
+import { frontendBase } from "../../services/api";
 import axios from "axios";
 
 const Login = () => {
@@ -40,19 +40,6 @@ const Login = () => {
 
       console.log(tokenResponse);
 
-      // const response = await axios.create({
-      //   baseURL: 'http://localhost:8000',
-      //   withCredentials: true,
-      //   withXSRFToken: true, // !!!
-      // }).post('/login', {
-      //   email: email,
-      //   password: password,
-      // }, {
-      //   headers: {
-      //     'Authorization': 'Bearer ' + token,
-      //     // 'Content-Type': 'application/json'
-      //   }
-      // });
       console.log(tokenResponse);
       if (tokenResponse.status === 200) {
         // получение bearer token
