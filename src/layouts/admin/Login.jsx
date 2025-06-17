@@ -113,7 +113,7 @@ const Login = () => {
               <input
                 className="login__input"
                 type="email"
-                placeholder="admin2@gmail.com"
+                placeholder="email"
                 name="email"
                 required
                 value={email}
@@ -125,7 +125,7 @@ const Login = () => {
               <input
                 className="login__input"
                 type="password"
-                placeholder=""
+                placeholder="password"
                 name="password"
                 required
                 value={password}

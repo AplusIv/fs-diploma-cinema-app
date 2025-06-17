@@ -52,6 +52,8 @@ const Home = () => {
   // console.log({ placesReduxErrorStatus });
   // console.log({ moviesReduxErrorStatus });
   // console.log({ sessionsReduxErrorStatus });
+  console.log({ loginReduxLoading });
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ const Home = () => {
 
     dispatch(getUser());
     // Если пользователь с правами администратора -> загрузить основные сущности: залы, места, фильмы, сеансы
-  }, []);
+  }, [ApiTokenRedux, loginRedux]);
 
 
   useEffect(() => {
