@@ -31,7 +31,7 @@ const SessionManager = () => {
       backgroundColor: window.getComputedStyle(el).backgroundColor,
     }
   });
-  console.log({ backgroundColors });
+  // console.log({ backgroundColors });
 
 
   // Фильмы для добавления в DB при обработке кнопки "Сохранить"
@@ -59,9 +59,7 @@ const SessionManager = () => {
   // сатусы загрузки данных
   const hallsReduxLoading = useSelector(state => state.hallsReducer.loading);
   const moviesReduxLoading = useSelector(state => state.moviesReducer.loading);
-  console.log({ moviesReduxLoading });
   const sessionsReduxLoading = useSelector(state => state.sessionsReducer.loading);
-  console.log({ sessionsReduxLoading });
 
 
   // sessionManagerSlice
@@ -70,10 +68,7 @@ const SessionManager = () => {
   const selectedDayRedux = useSelector(state => state.sessionManagerReducer.selectedDay);
   const hallsInfoRedux = useSelector(state => state.sessionManagerReducer.halls); // Сеансы на разные даты
   const sessionsInfoRedux = useSelector(state => state.sessionManagerReducer.sessions); // Сеансы на разные даты
-  console.log({ sessionsInfoRedux });
   const moviesInfoRedux = useSelector(state => state.sessionManagerReducer.movies); // Сеансы на разные даты
-  console.log({ moviesInfoRedux });
-
 
   // popupInfoRedux
   const popupInfoRedux = useSelector(state => state.popupInfoReducer.popupInfo)

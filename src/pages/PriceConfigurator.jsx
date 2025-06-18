@@ -19,7 +19,6 @@ const PriceConfigurator = () => {
 
   // статус обновления начальными данными
   const refreshDataStatusRedux = useSelector(state => state.hallPricesReducer.refreshDataStatus);
-  console.log({ refreshDataStatusRedux });
 
   // статусы загрузки
   const hallsReduxLoading = useSelector(state => state.hallsReducer.loading);
