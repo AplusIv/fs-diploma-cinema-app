@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const SectionButtons = ({ handleRefresh, handleDBUpdate }) => {
   return (
     <fieldset className="conf-step__buttons text-center">

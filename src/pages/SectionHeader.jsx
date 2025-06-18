@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const SectionHeader = ({ name, isActiveHeaderState, handleClick }) => {
   return (
     <header className={ 

@@ -29,10 +29,8 @@ const Logout = () => {
         // удаление куки с токеном (передать отрицательную дату)
         document.cookie = `apiToken=;expires=${new Date(0)}`;
 
-        // sessionStorage.removeItem('userIsAdmin');
-
         // navigate('/login'); // localhost routes
-        navigate(frontendBase + '/login'); // localhost routes
+        navigate(frontendBase + '/login');
       }
     } catch (error) {
       console.log(error);

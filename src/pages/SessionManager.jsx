@@ -8,7 +8,7 @@ import { postSessionData, setToInitialData as setToInitialNewSessionData } from 
 import { changeMovies, changeSessions, setDays, setHalls, setMovies, setRefreshDataStatus, setSelectedDay, setSessions } from '../redux/slices/sessionManagerSlice';
 import { getSessions } from '../redux/slices/sessionSlice';
 
-import poster from '../img/admin/poster.png'
+// import poster from '../img/admin/poster.png'
 import SectionButtons from './SectionButtons'
 import SectionHeader from './SectionHeader'
 import Popup4 from './Popup4';
@@ -317,30 +317,6 @@ const SessionManager = () => {
     setSessionsToChangeInDB(sessionsToChange);
     const sessionsToAdd = sessionsToAddInDB.filter(session => session.movie_id !== movieId)
     setSessionsToAddInDB(sessionsToAdd);
-
-    // IDs для удаления (только для уже сохраненных в БД фильмов, сеансы удалятся каскадно в Laravel)
-
-    // const sessionsToDelete = sessions.filter(session => session.movie_id === movieId);
-    // const sessionsToDeleteIds = sessionsToDelete.map(session => session.id);
-
-    // let updatedSessionsToDeleteInDB = [];
-    // if (sessionsToDeleteIds.length > 0) {
-    //   sessionsToDeleteIds.forEach(element => {
-    //     let id = sessionsToDeleteInDB.filter(id => id === element)
-    //   })
-    // }
-
-    // if (sessionsToDelete.length > 0) {
-    //   setSessionsToDeleteInDB(sessionsToDeleteInDB.concat(sessionsToDelete.map(session => session.id)))
-    // }
-
-
-    // Вернуть при ошибке!!!
-    // const sessionsToDelete = sessionsRedux.filter(session => session.movie_id === movieId);
-
-    // if (sessionsToDelete.length > 0) {
-    //   setSessionsToDeleteInDB(sessionsToDeleteInDB.concat(sessionsToDelete.map(session => session.id)))
-    // }
   }
 
   const handleDBUpdate = async (e) => {
@@ -468,7 +444,6 @@ const SessionManager = () => {
               <div
                 key={movie.id}
                 id={`movie_id=${movie.id}`}
-                // data-movieId={`${movie.id}`}
                 className="conf-step__movie"
                 onClick={() => {
                   // console.log(window.getComputedStyle(e.currentTarget).backgroundColor);

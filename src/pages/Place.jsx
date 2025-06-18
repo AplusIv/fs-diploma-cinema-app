@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const Place = ({ place, handlePlaceType }) => {
   const placeType = place.type;
   return (

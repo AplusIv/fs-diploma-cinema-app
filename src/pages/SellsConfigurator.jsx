@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionHeader from "./SectionHeader";
 import { useDispatch, useSelector } from "react-redux";
-import { getSessions, putToggleSessionsSalesActive } from "../redux/slices/sessionSlice";
-
-
-import { getUser } from "../redux/slices/loginSlice";
-import { setRefreshDataStatus } from "../redux/slices/sessionManagerSlice";
-import { getMovies } from "../redux/slices/movieSlice";
-import { getHalls } from "../redux/slices/hallSlice";
+import { putToggleSessionsSalesActive } from "../redux/slices/sessionSlice";
 
 const SellsConfigurator = () => {
   const [isActiveHeaderState, setIsActiveHeaderState] = useState(true);
@@ -23,7 +17,7 @@ const SellsConfigurator = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(false);    
+    setLoading(false);
   }, [sessionsRedux])
 
   const handleActiveSales = () => {
@@ -31,18 +25,11 @@ const SellsConfigurator = () => {
     setLoading(true);
 
     dispatch(putToggleSessionsSalesActive('api/sessions/sales/is_active'));
-    // обновить страницу
-    // dispatch(getUser());
-    // вновь запросить изменившиеся данные с сервера для обновления стора
-    // dispatch(getMovies());
-    // dispatch(getSessions());
-    // dispatch(getHalls());
-    // dispatch(setRefreshDataStatus('refresh data'));
   }
 
   const activeSalesState = sessionsRedux.every(session => session.is_sales_active == true); // session.is_sales_active = 0 || 1
-  console.log({activeSalesState});
-  
+  console.log({ activeSalesState });
+
   const activeSessions = sessionsRedux.filter(session => session.is_sales_active == true);
   const inActiveSessions = sessionsRedux.filter(session => session.is_sales_active == false);
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PopupInput from "./PopupInput";
 import { useDispatch, useSelector } from "react-redux";
 import { changeData } from "../redux/slices/hallPopupDataHandlerSlice";

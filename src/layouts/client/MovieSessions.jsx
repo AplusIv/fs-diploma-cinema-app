@@ -53,19 +53,6 @@ const MovieSessions = ({ movie, halls, sessions, places }) => {
                         </span>
                       </div>
                     }
-                    {/* <Link 
-                    to="../buying" 
-                    className="movie-seances__time" 
-                    state={{movie, hall, session, places: places.filter(place => place.hall_id === hall.id)}} 
-                    onClick={() => {
-                    handleBuy({
-                      movie, 
-                      hall, 
-                      session, 
-                      places: places.filter(place => place.hall_id === hall.id),
-                    })}}>
-                    {session.time}
-                  </Link> */}
                   </li>
                   : null
               ))}

@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import PopupInput from "./PopupInput";
-import PopupTextarea from "./PopupTextarea";
+// import PopupTextarea from "./PopupTextarea";
 import PopupSelect from "./PopupSelect";
 
+// компонент не использовался в обновлённой версии проекта
 
 const PopupChangeSessionsForm = ({ editedElement, halls, onChangeCallback }) => {
   const [newItem, setNewItem] = useState(editedElement);

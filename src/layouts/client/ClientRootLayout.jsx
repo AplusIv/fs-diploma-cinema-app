@@ -1,13 +1,9 @@
-// import '../../sass/client/normalize.css'
-// import '../../sass/client/styles.scss'
 import { useEffect } from 'react';
-// import '../../sass/client/clientPageBackground.css'
 
 import { Outlet, useLocation } from "react-router-dom"
 import { frontendBase } from '../../services/api';
 
 const ClientRootLayout = () => {
-
   // цвет фона для разных путей
   const location = useLocation();
   useEffect(() => {

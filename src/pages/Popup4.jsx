@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import PopupBase from "./PopupBase";
 import PopupChangeForm from "./PopupChangeForm";
 import PopupHallAdding from "./PopupHallAdding";

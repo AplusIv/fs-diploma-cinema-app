@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { nanoid } from "nanoid";
 
 const SessionDates = ({ days, date, handleChangeDate }) => {

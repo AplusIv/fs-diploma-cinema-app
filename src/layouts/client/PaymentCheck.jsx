@@ -34,7 +34,7 @@ const PaymentCheck = () => {
 
     if (!orderRedux && !hallRedux && !movieRedux && !sessionRedux) {
       if (hallStorage && movieStorage && cinemaSessionStorage && placesByHallStorage && orderStorage && newOrderTicketsStorage) {
-        console.log('Обновление данных из хранилища после перезагрузки страницы');
+        // console.log('Обновление данных из хранилища после перезагрузки страницы');
         dispatch(setDataInBuyingSlice());
         dispatch(setDataInOrderSlice());
         dispatch(setDataInTicketSlice());
@@ -43,7 +43,6 @@ const PaymentCheck = () => {
 
     // если есть заказ -> запросить его билеты
     if (orderRedux) {
-      console.log('get new order tickets data');
       dispatch(getNewOrderTickets({
         url: 'api/guest/tickets/order',
         id: orderRedux.id,

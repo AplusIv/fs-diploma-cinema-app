@@ -21,12 +21,8 @@ import { frontendBase } from '../../services/api';
 
 const Home = () => {
   const loginRedux = useSelector(state => state.loginReducer.loggedIn);
-  console.log({ loginRedux });
   const userIsAdminRedux = useSelector(state => state.loginReducer.userIsAdmin);
-  console.log({ userIsAdminRedux });
-
   const apiTokenRedux = useSelector(state => state.loginReducer.apiToken);
-  console.log({ apiTokenRedux });
 
   // статусы загрузки данных
   const hallsReduxLoading = useSelector(state => state.hallsReducer.loading);
@@ -52,8 +48,10 @@ const Home = () => {
   // console.log({ placesReduxErrorStatus });
   // console.log({ moviesReduxErrorStatus });
   // console.log({ sessionsReduxErrorStatus });
-  console.log({ loginReduxLoading });
-
+  // console.log({ loginReduxLoading });
+  // console.log({ loginRedux });
+  // console.log({ userIsAdminRedux });
+  // console.log({ apiTokenRedux });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,13 +61,7 @@ const Home = () => {
     // проверка аутентификации пользователя 
     console.log('проверка аутентификации пользователя');
 
-    // if (!apiTokenRedux === null) {
-    //   // не запрашивать юзера после логаута
-    //   dispatch(getUser());
-    // }
-
     dispatch(getUser());
-
     // Если пользователь с правами администратора -> загрузить основные сущности: залы, места, фильмы, сеансы
   }, [apiTokenRedux, loginRedux]);
 
@@ -94,7 +86,6 @@ const Home = () => {
   }
 
   if (loginReduxLoading === 'failed') {
-    // navigate('/login');
     navigate(frontendBase + '/login');
   }
 

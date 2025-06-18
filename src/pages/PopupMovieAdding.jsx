@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { changeData, setToInitialData } from "../redux/slices/popupAddMovieHandlerSlice";
 import PopupInput from "./PopupInput";
@@ -104,8 +105,6 @@ const PopupMovieAdding = ({ buttonTitle, onAddCallback, handlePopup }) => {
             onChangeCallback={onChangeItemData} />
         </label>
       </div> */}
-
-      {/* <input type="file" name="poster" accept="image/png, image/jpeg" /> */}
 
       <button type="submit" className="conf-step__button conf-step__button-accent" onSubmit={handleAddData}>{buttonTitle}</button>
     </form>

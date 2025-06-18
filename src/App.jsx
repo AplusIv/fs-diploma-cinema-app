@@ -27,7 +27,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path={frontendBase + "/"} element={<RootLayout />} errorElement={<ShowError />}>
-        {/* <Route path="/" element={<RootLayout />}> */}
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="*" element={<NotFound />} />

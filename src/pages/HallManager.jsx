@@ -15,15 +15,6 @@ const HallManager = () => {
     setIsActiveHeaderState(!isActiveHeaderState);
   }
 
-  // const handleClick = (e) => {
-  //   console.log(e.currentTarget.className);
-  //   // if (e.target.contains)
-  //   if (e.currentTarget.classList.contains('conf-step__header')) {
-  //     setIsActiveHeaderState(!isActiveHeaderState);
-  //   }
-  //   // setIsActiveHeaderState(!isActiveHeaderState);
-  // }
-
   // redux popupInfo
   const hallPopupInfoRedux = useSelector(state => state.hallPopupInfoReducer.hallPopupInfo);
 
@@ -53,7 +44,7 @@ const HallManager = () => {
   }
 
   const handleAddData = (newData) => {
-      dispatch(postHallData(newData));
+    dispatch(postHallData(newData));
   }
 
   const handleDeleteHall = (id) => {
@@ -62,7 +53,7 @@ const HallManager = () => {
 
   if (hallsReduxLoading !== 'idle') {
     return (
-      <section className="conf-step" > 
+      <section className="conf-step" >
         <SectionHeader name={'Управление залами'} isActiveHeaderState={isActiveHeaderState} handleClick={toggleSectionVisibility} />
         <div className="conf-step__wrapper">
           <span className="loader" ></span>
@@ -81,7 +72,7 @@ const HallManager = () => {
       />
 
       <SectionHeader name={'Управление залами'} isActiveHeaderState={isActiveHeaderState} handleClick={toggleSectionVisibility} />
-      
+
       {<div className="conf-step__wrapper">
         <p className="conf-step__paragraph">Доступные залы:</p>
         <ul className="conf-step__list">

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const HallName = ({ hall, handleDeleteHall }) => {
   return (
     <li>{hall.title}{' '}

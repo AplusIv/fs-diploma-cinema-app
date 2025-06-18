@@ -1,14 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { setData, setSelectedMovieTitle } from "../redux/slices/popupEditSessionsHandlerSlice";
 
-const PopupSelect = ({ 
-  belongsTo, 
-  optionsData, 
-  name, 
-  edit=true, 
-  onChangeCallback, 
-  sessions, 
-  selectedIndex=null }) => {
+const PopupSelect = ({
+  belongsTo,
+  optionsData,
+  name,
+  edit = true,
+  onChangeCallback,
+  sessions,
+  selectedIndex = null
+}) => {
 
   const selectedMovieValue = useSelector(state => state.popupEditSessionsReducer.popupSelectedMovieTitle); // имя поля из импута соответствует свойству объекта из состояния
   // const selectedSessionIndex = useSelector(state => state.popupEditSessionsReducer.popupSelectedSession);
@@ -33,7 +35,7 @@ const PopupSelect = ({
   }
 
   const dispatch = useDispatch();
-  
+
   if (optionsData.length === 0) return null;
 
   return (
@@ -42,13 +44,13 @@ const PopupSelect = ({
       value={value}
       onChange={(e) => {
         if (belongsTo === 'sessions filter') {
-          dispatch(setSelectedMovieTitle({title: e.target.value})); 
-          dispatch(setData({movies: optionsData, sessions}));
+          dispatch(setSelectedMovieTitle({ title: e.target.value }));
+          dispatch(setData({ movies: optionsData, sessions }));
         } else {
           onChangeCallback && onChangeCallback(e.target.value, name);
         }
       }}
-      name={name} 
+      name={name}
       disabled={!edit}
       required
     >

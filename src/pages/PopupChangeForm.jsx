@@ -6,7 +6,7 @@ import PopupInput from "./PopupInput";
 import PopupTextarea from "./PopupTextarea";
 import PopupFileInput from "./PopupFileInput";
 
-const PopupChangeForm = ({onChangeCallback, buttonTitle, handlePopup, onDeleteCallback }) => {
+const PopupChangeForm = ({onChangeCallback, buttonTitle, onDeleteCallback }) => {
   // redux edited movie data 
   const popupData = useSelector(state => state.popupEditMovieReducer.popupEditedMovieData);
   console.log({popupData});

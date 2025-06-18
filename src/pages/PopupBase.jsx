@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import cross from '../img/admin/cross.png'
 
 const PopupBase = ({ popupInfo, handlePopup, children }) => {

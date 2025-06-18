@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Place from "./Place";
 import { nanoid } from "nanoid";
 

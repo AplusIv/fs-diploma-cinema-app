@@ -1,10 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { changeData, setToInitialData } from "../redux/slices/popupAddSessionHandlerSlice";
 import PopupSelect from "./PopupSelect";
 import PopupInput from "./PopupInput";
 
 
-const PopupNewDataAdding2 = ({ halls, movies, buttonTitle, onAddCallback, edit }) => {
+const PopupNewDataAdding2 = ({
+  halls,
+  movies,
+  buttonTitle,
+  onAddCallback,
+  edit
+}) => {
   // redux added session data 
   const popupData = useSelector(state => state.popupAddSessionReducer.popupAddSessionData);
 
@@ -12,7 +19,7 @@ const PopupNewDataAdding2 = ({ halls, movies, buttonTitle, onAddCallback, edit }
 
   const handleAddData = (e) => {
     e.preventDefault();
-    
+
     console.log('добавление нового элемента в массив');
     // redux
     onAddCallback(popupData);

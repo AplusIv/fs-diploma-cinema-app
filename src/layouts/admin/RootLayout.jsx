@@ -1,14 +1,12 @@
 // import '../../sass/admin/normalize.css'
 // import '../../sass/admin/styles.scss'
 import { useEffect } from 'react';
-// import '../../sass/admin/adminPageBackground.css'
 
 import { Outlet, useLocation } from "react-router-dom"
 import Logout from './Logout';
 import { frontendBase } from '../../services/api';
 
 const RootLayout = () => {
-
   // цвет фона для разных путей
   const location = useLocation();
   useEffect(() => {

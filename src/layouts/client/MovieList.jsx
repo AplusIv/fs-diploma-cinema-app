@@ -39,10 +39,8 @@ const MovieList = () => {
   const dispatch = useDispatch();
 
   const { date } = useParams();
-  console.log(date);
 
   useEffect(() => {
-    // console.log('MovieList effect is on');
     // Получение сеансов на конкретные даты
     dispatch(getSessionsByDate(date));
   }, [date])
@@ -98,7 +96,6 @@ const MovieList = () => {
           sessionsByDateAndMovie.sort(compareFnByDateAssending); // сортировать массив по столбцам "дата" и "время" по возрастанию
           return (
             <section key={movie.id} className="movie">
-              {/* <MovieInfo movie={movie} poster={poster1} /> */}
               <MovieInfo movie={movie} poster={BASEURL + movie.poster} />
 
               <MovieSessions movie={movie} halls={hallsRedux} sessions={sessionsByDateAndMovie} places={placesRedux} />

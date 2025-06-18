@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setApiToken, setLoggedIn } from "../../redux/slices/loginSlice";
 import Tooltip from "../client/Tooltip";
-import { frontendBase } from "../../services/api";
-import axios from "axios";
+import apiClient, { frontendBase } from "../../services/api";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -21,26 +20,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // axios.defaults.withCredentials = true;
 
     try {
-      // const tokenResponse = await apiClient.post('api/createToken', {
-      //   email: email,
-      //   password: password,
-      // });
-
-      const tokenResponse = await axios.create({
-        baseURL: 'http://localhost:8000',
-        withCredentials: true,
-        withXSRFToken: true,
-      }).post('api/createToken', {
-        email: email,
-        password: password,
-      });
+      const tokenResponse = await apiClient.post(
+        'api/createToken',
+        {
+          email: email,
+          password: password,
+        });
 
       console.log(tokenResponse);
 
-      console.log(tokenResponse);
       if (tokenResponse.status === 200) {
         // получение bearer token
         const responseData = tokenResponse.data;
@@ -52,8 +42,6 @@ const Login = () => {
         // запись в куки "token=<apitoken>"
         document.cookie = 'apiToken=' + apiToken;
 
-        // export apiToken
-
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');
@@ -64,15 +52,13 @@ const Login = () => {
       // Когда пользователь залогинен, но отсутствует запись в сессии
       if (error.response.status === 403 && error.response.data.message === "Already Authenticated") {
         console.log('сессия пользователя обновлена');
-        /* login(); // если основной запрос 302 -> залогиниться
-        sessionStorage.setItem('loggedIn', true); */
         dispatch(setLoggedIn());
         // navigate('/'); // localhost routes
         navigate(frontendBase + '/');
       }
 
       setTooltip({
-        text: error.response.data.message || Object.values(error.response.data.err)[0],
+        text: error.response.data.message || Object.values(error.response.data.err)[0], // перехваченный текст ошибки запроса
         active: true
       });
       setTimeout(() => {
@@ -126,7 +112,6 @@ const Login = () => {
                 className="login__button"
               />
             </div>
-            {/* <p>{email} + {password}</p> */}
 
             {tooltip.active && <Tooltip text={tooltip.text} />}
 

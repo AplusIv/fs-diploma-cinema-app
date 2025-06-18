@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
 import { changeData, filterData, setHalls, setSelectedSession } from "../redux/slices/popupEditSessionsHandlerSlice";
 import PopupInput from "./PopupInput";

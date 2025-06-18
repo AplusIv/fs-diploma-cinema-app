@@ -34,7 +34,7 @@ const TicketCheck = () => {
 
     if (!orderRedux && !hallRedux && !movieRedux && !sessionRedux) {
       if (hallStorage && movieStorage && cinemaSessionStorage && placesByHallStorage && orderStorage && newOrderTicketsStorage) {
-        console.log('Обновление данных из хранилища после перезагрузки страницы');
+        // console.log('Обновление данных из хранилища после перезагрузки страницы');
         dispatch(setDataInBuyingSlice());
         dispatch(setDataInOrderSlice());
         dispatch(setDataInTicketSlice());
